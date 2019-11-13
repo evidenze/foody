@@ -31,7 +31,6 @@
            <p class="text-secondary">Delivery Status:</p>
            <p class="font-weight-bold">{{ $order->delivered == true ? 'Delivered' : 'Pending Delivery' }}</p>
        </div>
-
    </div>
 
    @if(!$order->paid)
@@ -87,6 +86,7 @@
                 @method('PUT')
 
                     <input type="hidden" name="id" value="{{ $order->id }}">
+
                     <p><button type="submit" class="btn btn-primary">
                         Confirm Delivery
                     </button></p>
