@@ -60,8 +60,11 @@
                                 </div>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ url('admin/login') }}">{{ __('Admin') }}</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ url('admin/login') }}">{{ __('Cart') }}</a>
-                            </li>                
+                            </li>               
                             <li class="nav-item">
                                 <a class="nav-link" href="#">{{ __('About Us') }}</a>
                             </li>

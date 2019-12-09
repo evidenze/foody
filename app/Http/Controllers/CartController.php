@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
 use App\Orders;
+use Cart;
 use Illuminate\Http\Request;
 use Melihovv\ShoppingCart\Facades\ShoppingCart;
 
@@ -12,6 +12,25 @@ class CartController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+
+    public function showtocart(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'amount' => 'required|numeric',
+            'id' => 'required'
+        ]);
+
+        Cart::add(array(
+            'id' => $request->id,
+            'name' => $request->name,
+            'price' => $request->amount,
+            'quantity' => 1,
+        ));
+
+        return back()->with('added', 'Item added to Cart');
     }
 
 

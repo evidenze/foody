@@ -6,6 +6,12 @@
     <h4 class="pl-5">{{ $vendor->name }}</h4>
 </div>
 
+@if(session()->has('added'))
+    <div class="alert alert-success text-center" role="alert">
+        {{ session('added') }}
+    </div>
+@endif
+
 <div class="container mt-5">
 
     <h1>Our Menu List</h1>
@@ -19,12 +25,12 @@
             <img src="{{ asset('storage/'.$product->photo) }}" class="mx-auto d-block" alt="..." style="width:100%;height:200px;object-fit:contain;"><br>
             <h5 class="card-title font-weight-bold">{{ $product->name }}</h5>
             <p class="text-center text-secondary">NGN {{ number_format($product->amount) }}</p>
-            <form method="POST" action="{{ route('addToCart') }}" >
+            <form method="POST" action="{{ route('showtocart') }}" >
                 @csrf
 
-                <input type="hidden" name="id" value="1"/>
-                    <input type="hidden" name="name" value="Fried Rice">
-                    <input type="hidden" name="prize" value="1200">
+                    <input type="hidden" name="id" value="{{ $product->id }}"/>
+                    <input type="hidden" name="name" value="{{ $product->name }}">
+                    <input type="hidden" name="amount" value="{{ $product->amount }}">
                     <button type="submit" class="btn cart">
                         Add to Cart
                     </button>

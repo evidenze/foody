@@ -24,6 +24,7 @@ Route::get('/place-order', 'HomeController@processOrder')->name('placeOrder');
 Route::get('/confirm-payment/{txref}', 'HomeController@confirmOrder')->name('confirmOrder');
 Route::get('/confirm-order-payment/{txref}/{product_id}', 'HomeController@confirmOrderPayment')->name('confirmOrderPayment');
 Route::post('/add-to-cart', 'CartController@addToCart')->name('addToCart');
+Route::post('/show-to-cart', 'CartController@showtocart')->name('showtocart');
 Route::get('/cart', 'CartController@showCart')->name('showCart');
 Route::get('/checkout', 'CartController@checkout')->name('checkout');
 Route::get('/order/{id}', 'CartController@showOrderDetails')->name('orderDetails');

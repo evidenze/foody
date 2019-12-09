@@ -58,6 +58,7 @@
                             <th scope="col">Product</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Prize</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Action</th>                            
                             </tr>
                         </thead>
@@ -67,6 +68,7 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->quantity }}</td>
                             <td>NGN {{ number_format($item->amount) }}</td>
+                            <td>{{ $item->is_verified == true ? 'Verified' : 'Pending verification' }}</td>
                             <td><a class="btn cart" href="{{ route('editProduct', $item->id) }}">View Details</a></td>
                             </tr>
                             @endforeach
