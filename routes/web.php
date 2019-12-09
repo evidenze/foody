@@ -44,6 +44,8 @@ Route::group(['prefix' => 'admin','middleware' => 'assign.guard:admin,admin/logi
     Route::get('/home', 'AdminController@index')->name('admin.home');
     Route::put('/confirm-delivery', 'AdminController@confirmProduct')->name('confirmDelivery');
     Route::get('/product/{id}', 'AdminController@showOrderDetails')->name('productDetails');
+    Route::get('/restaurant/{id}', 'AdminController@showVendorDetails')->name('vendorDetails');
+    Route::put('/confirm-vendor/{id}', 'AdminController@confirmVendor')->name('confirmVendor');
 });
 
 Route::get('vendor/login', 'VendorLoginController@showLoginForm');

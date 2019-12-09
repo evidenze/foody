@@ -58,7 +58,7 @@
                             <td>{{ $vendor->phone }}</td>
                             <td>{{ $vendor->email }}</td>
                             <td>{{ $vendor->is_active == true ? 'Verified' : 'Pending verification' }}</td>                            
-                            <td><a class="btn cart" href="{{ route('productDetails', $vendor->id) }}">View Details</a></td>
+                            <td><a class="btn cart" href="{{ route('vendorDetails', $vendor->id) }}">View Details</a></td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container-fluid bg-dark text-white p-5">
-    <h4>Shop Restaurant</h4>
+    <h4 class="pl-5">{{ $vendor->name }}</h4>
 </div>
 
 <div class="container mt-5">

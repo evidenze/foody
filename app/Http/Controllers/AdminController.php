@@ -46,4 +46,20 @@ class AdminController extends Controller
 
         return back()->with('verified', 'Product has been verified successfully.');
     }
+
+     public function showVendorDetails(Request $request, $id)
+    {
+        $vendor = Vendor::where('id', $id)->first();
+
+        return view('vendor-details', ['vendor' => $vendor]);
+    }
+
+    public function confirmVendor(Request $request)
+    {
+        $vendor = Vendor::where('id', $request->id)->first();
+        $vendor->is_active = true;
+        $vendor->save();
+
+        return back()->with('vendor', 'Vendor has been verified successfully.');
+    }
 }

@@ -27,6 +27,9 @@
         </div>
 
         @endforeach
+        @else
+
+        <h4>No restaurant</h4>
 
         @endif
     </div>

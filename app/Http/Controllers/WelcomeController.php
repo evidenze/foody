@@ -18,7 +18,8 @@ class WelcomeController extends Controller
     public function showShop($id)
     {
         $products = Products::where('vendor_id', $id)->get();
+        $vendor = Vendor::where('id', $id)->first();
 
-        return view('shop', ['products' => $products]);
+        return view('shop', ['products' => $products, 'vendor' => $vendor]);
     }
 }
