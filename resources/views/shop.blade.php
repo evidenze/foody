@@ -31,6 +31,7 @@
                     <input type="hidden" name="id" value="{{ $product->id }}"/>
                     <input type="hidden" name="name" value="{{ $product->name }}">
                     <input type="hidden" name="amount" value="{{ $product->amount }}">
+                    <input type="hidden" name="vendor_id" value="{{ $vendor->id }}"/>
                     <button type="submit" class="btn cart">
                         Add to Cart
                     </button>

@@ -53,15 +53,15 @@ class HomeController extends Controller
             return view('make-payment');
         }else{
 
-            $order = new Orders;
-            $order->prize = session('amount') * session('quantity');
-            $order->address = session('address');
-            $order->name = session('name');
-            $order->quantity = session('quantity');
-            $order->product_id = session('product_id');
-            $order->paid = false;
-            $order->user_id = Auth::id();
-            $order->save();
+            foreach(Cart::getContent() as $item){
+                
+                $sales = new Sales;
+                $sales->quantity = $item->quantity;
+                $sale->amount = $item->price;
+                $sales->product_id = $item->id;
+                $sales->vendor_id = $item->vendor_id;
+                $sales->save();
+            }
 
             return redirect('home')->with('success', 'Order placed successfully.');
         }

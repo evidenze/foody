@@ -28,6 +28,7 @@ class CartController extends Controller
             'name' => $request->name,
             'price' => $request->amount,
             'quantity' => 1,
+            'vendor_id' => $request->vendor_id,
         ));
 
         return back()->with('added', 'Item added to Cart');
