@@ -45,12 +45,19 @@
                         <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/') }}">{{ __('Welcome Page') }}</a>
                             </li>
-                                <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/home') }}">{{ __('Dashboard') }}</a>
-                            </li>                            
+                                 <li class="nav-item">
+                                <a class="nav-link" href="{{ url('vendor/login') }}">{{ __('Vendor') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('admin/login') }}">{{ __('Admin') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('admin/login') }}">{{ __('Cart') }}</a>
+                            </li>                
                             <li class="nav-item">
                                 <a class="nav-link" href="#">{{ __('About Us') }}</a>
                             </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" href="#">{{ __('Contact Us') }}</a>
                             </li>
@@ -64,6 +71,9 @@
                                 </li>
                             @endif
                         @else
+                         <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/home') }}">{{ __('Dashboard') }}</a>
+                            </li> 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->firstname }} <span class="caret"></span>

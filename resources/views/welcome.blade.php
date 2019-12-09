@@ -12,6 +12,27 @@
 @endif
 
 <div class="container mt-5">
+    <h4>Top Restaurants</h4><br><br>
+
+    <div class="row text-center">
+        @if(count($vendors) > 0)
+
+        @foreach($vendors as $vendor)
+
+        <div class="col-md-3">
+            <div class="card p-5 shadow-sm">
+                <h4>{{ $vendor->name }}</h4><br>
+                <a href="{{ route('showShop', $vendor->id) }}" class="btn cart">Shop Now</a>
+            </div>
+        </div>
+
+        @endforeach
+
+        @endif
+    </div>
+</div>
+
+{{--  <div class="container mt-5">
 
     <h1>Our Products</h1>
 
@@ -68,7 +89,7 @@
             <div class="card-body">
             <img src="{{ url('/images/hamburger.jpeg') }}" class="mx-auto d-block" alt="..." style="width:100%;height:200px;object-fit:contain;"><br>
             <h5 class="card-title font-weight-bold">Hamburger</h5>
-            <p class="text-center text-secondary">NGN1,500</p>            
+            <p class="text-center text-secondary">NGN1,500</p>
                <form method="POST" action="{{ route('addToCart') }}" >
                 @csrf
                 <input placeholder="Quantity" type="number" name="quantity" class="form-control @error('quantity') is-invalid @enderror" required>
@@ -212,7 +233,7 @@
         </div>
         </div>
     </div>
-</div>
+</div>  --}}
 
 <div class="container-fluid bg-dark pt-5 pb-5 mt-5 text-center text-white">
     <p>&copy; 2019 FoodyStack. All Right Reserved.</p>

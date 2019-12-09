@@ -3,38 +3,47 @@
 namespace App\Http\Controllers;
 
 use App\Orders;
+use App\Vendor;
+use App\Products;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('assign.guard:admin,admin/login');
     }
 
     public function index()
     {
-        $orders = Orders::all();
+        $vendors = Vendor::all();
+        $products = Products::all();
         $pending = Orders::where('delivered', false)->get();
         $delivered = Orders::where('delivered', true)->get();
         $earning = Orders::all()->sum('prize');
 
-        return view('admin', ['orders' => $orders, 'pending' => $pending, 'earning' => $earning, 'delivered' => $delivered]);
+        return view('admin', [
+            'vendors' => $vendors, 
+            'pending' => $pending, 
+            'earning' => $earning, 
+            'delivered' => $delivered,
+            'products' => $products,
+            ]);
     }
 
     public function showOrderDetails(Request $request, $id)
     {
-        $orders = Orders::where('id', $id)->first();
+        $products = Products::where('id', $id)->first();
 
-        return view('product-details', ['order' => $orders]);
+        return view('product-details', ['product' => $products]);
     }
 
-    public function confirmDelivery(Request $request)
+    public function confirmProduct(Request $request)
     {
-        $order = Orders::where('id', $request->id)->first();
-        $order->delivered = true;
-        $order->save();
+        $product = Products::where('id', $request->id)->first();
+        $product->is_verified = true;
+        $product->save();
 
-        return back()->with('delivered', 'Order has been confirmed as delivered.');
+        return back()->with('verified', 'Product has been verified successfully.');
     }
 }

@@ -9,8 +9,8 @@
             <div class="row mt-5">
                 <div class="col-md-3 mb-3">
                     <div class="card shadow-sm p-3">
-                        <p class="font-weight-bold">Total Orders</p>
-                        <h4>{{ count($orders) }}</h4>
+                        <p class="font-weight-bold">Total Vendors</p>
+                        <h4>{{ count($vendors) }}</h4>
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
@@ -33,36 +33,68 @@
                 </div>
             </div>
             <div class="card shadow-sm mt-5 mb-5">
-                <div class="card-header">Orders List</div>
+                <div class="card-header">Vendors List</div>
 
                 <div class="card-body">
-                   @if (count($orders) == 0)
-                    <h4 class="text-center">No order made.</h4><br>
-                    <p class="text-center"><a class="btn cart" href="{{ url('/') }}">Go to Shop</a></p>
+                   @if (count($vendors) == 0)
+                    <h4 class="text-center">No vendor available.</h4><br>
 
                     @else
                     <div class="table-responsive">
                         <table class="table">
                         <thead>
                             <tr>
-                            <th scope="col">Product</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Prize</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Payment Status</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Status</td>
+                            <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody class="text-secondary">
-                            @foreach($orders as $item)
+                            @foreach($vendors as $vendor)
                             <tr>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->quantity }}</td>
-                            <td>NGN {{ number_format($item->prize) }}</td>
-                            <td>{{ $item->created_at->format('d-m-Y') }}</td>
-                            <td>{{ $item->paid == true ? 'Paid' : 'Pending payment' }}</td>
-                            <td>{{ $item->delivered == true ? 'Delivered' : 'Pending delivery' }}</td>
-                            <td><a class="btn cart" href="{{ route('productDetails', $item->id) }}">View Details</a></td>
+                            <td>{{ $vendor->name }}</td>
+                            <td>{{ $vendor->phone }}</td>
+                            <td>{{ $vendor->email }}</td>
+                            <td>{{ $vendor->is_active == true ? 'Verified' : 'Pending verification' }}</td>                            
+                            <td><a class="btn cart" href="{{ route('productDetails', $vendor->id) }}">View Details</a></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        </table>
+                    </div>
+                    @endif
+                </div>
+            </div>
+
+            <div class="card shadow-sm mt-5 mb-5">
+                <div class="card-header">Products List</div>
+
+                <div class="card-body">
+                   @if (count($products) == 0)
+                    <h4 class="text-center">No product available.</h4><br>
+
+                    @else
+                    <div class="table-responsive">
+                        <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Prize</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-secondary">
+                            @foreach($products as $product)
+                            <tr>
+                            <td>{{ $product->name }}</td>
+                            <td>{{ $product->amount }}</td>
+                            <td>{{ $product->quantity }}</td>
+                            <td>{{ $product->is_verified == true ? 'Verified' : 'Pending verification' }}</td>
+                            <td><a class="btn cart" href="{{ route('productDetails', $product->id) }}">View Product</a></td>
                             </tr>
                             @endforeach
                         </tbody>
