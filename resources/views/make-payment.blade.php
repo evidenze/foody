@@ -9,7 +9,7 @@
                 <div class="card-body text-center">
                     <p>Please click the button below to make payment for your order</p><br>
 
-                    <h4>NGN {{ number_format(session('amount') * session('quantity')) }}</h4><br>
+                    <h4>NGN {{ number_format(Cart::getTotal()) }}</h4><br>
 
 
                     <button id="send" class="btn btn-success" type="button">Make Payment</button>
@@ -21,7 +21,7 @@
                         document.getElementById('send').addEventListener('click', function () {
 
                         var flw_ref = "", chargeResponse = "", trxref = "FDKHGK"+ Math.random(), API_publicKey = "FLWPUBK-8f14588c2bb9f3d579759704c5957cd5-X";
-                        var amount = "{{ session('amount') * session('quantity') }}";
+                        var amount = "{{ Cart::getTotal() }}";
 
 
                         getpaidSetup(

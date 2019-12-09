@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="container mt-5">
+    <h4>Cart</h4><br>
   @if(count($items) == 0)
   <h4>No product added.</h4>
   @else
@@ -21,16 +22,16 @@
                 <tr>
                 <td>{{ $transfer->name }}</td>
                 <td>{{ $transfer->quantity }}</td>
-                <td>NGN {{ $transfer->prize / $transfer->quantity }}</td>
-                <td>NGN {{ number_format($transfer->prize) }}</td>
+                <td>NGN {{ number_format($transfer->price / $transfer->quantity) }}</td>
+                <td>NGN {{ number_format($transfer->price) }}</td>
                 </tr>
                 @endforeach
             </tbody>
             </table>
 
-            <p>Total: NGN {{ number_format($items->sum('prize')) }}</p>
+            <p>Total: NGN {{ number_format(Cart::getTotal()) }}</p>
             <a class="btn btn-success" href="{{ route('checkout') }}">Checkout</a>
-            <a class="btn cart" href="#">Continue Shopping</a>
+            <a class="btn cart" href="{{ url('welcome') }}">Continue Shopping</a>
         </div>
   @endif
 </div>

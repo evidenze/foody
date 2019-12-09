@@ -36,7 +36,7 @@ class CartController extends Controller
 
     public function showCart()
     {
-        $items = Cart::where('session_id', session()->getId())->get();
+        $items = Cart::getContent();
 
         return view('cart', ['items' => $items]);
     }
@@ -57,9 +57,9 @@ class CartController extends Controller
 
     public function checkout()
     {
-        $cart = Cart::where('session_id', session()->getId())->get();
+        $items = Cart::getContent();
 
-        return view('checkout', ['cart' => $cart]);
+        return view('checkout', ['items' => $items]);
     }
 
     public function showOrderDetails($id)

@@ -7,25 +7,31 @@
     <h4>Please confirm your order</h4><br>
 
     <p>Items</p><hr>
-    <div class="table-responsive mb-5">
-                        <table class="table">
-                        <thead>
-                            <tr>
-                            <th scope="col">Product</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Prize</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-secondary">
-                            <tr>
-                            <td>{{ session('name') }}</td>
-                            <td>{{ session('quantity') }}</td>
-                            <td>NGN {{ number_format(session('amount') * session('quantity')) }}</td>
-                            </tr>
-                        </tbody>
-                        </table>
-                    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Prize</th>
+                <th scope="col">Net Prize</th>
+                </tr>
+            </thead>
+            <tbody class="text-secondary">
+                @foreach($items as $transfer)
+                <tr>
+                <td>{{ $transfer->name }}</td>
+                <td>{{ $transfer->quantity }}</td>
+                <td>NGN {{ number_format($transfer->price / $transfer->quantity) }}</td>
+                <td>NGN {{ number_format($transfer->price) }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+            </table>
 
+            <p>Total: NGN {{ number_format(Cart::getTotal()) }}</p>
+           
+        </div><br><br>
 
 
                             <p>Delivery Information</p><hr>

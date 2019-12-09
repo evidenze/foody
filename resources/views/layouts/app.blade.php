@@ -63,7 +63,7 @@
                                 <a class="nav-link" href="{{ url('admin/login') }}">{{ __('Admin') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('admin/login') }}">{{ __('Cart') }}</a>
+                                <a class="nav-link" href="{{ route('showCart') }}">Cart ({{ Cart::getTotalQuantity() }})</a>
                             </li>               
                             <li class="nav-item">
                                 <a class="nav-link" href="#">{{ __('About Us') }}</a>
