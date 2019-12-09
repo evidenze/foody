@@ -9,11 +9,6 @@ use Melihovv\ShoppingCart\Facades\ShoppingCart;
 
 class CartController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
 
     public function showtocart(Request $request)
     {
@@ -28,8 +23,9 @@ class CartController extends Controller
             'name' => $request->name,
             'price' => $request->amount,
             'quantity' => 1,
-            'vendor_id' => $request->vendor_id,
         ));
+
+        $request->session()->put('vendor_id', $request->vendor_id);
 
         return back()->with('added', 'Item added to Cart');
     }

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Orders;
-use App\Cart;
+use Cart;
+use App\Sales;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,9 +28,8 @@ class HomeController extends Controller
     public function index()
     {
         $orders = Orders::where('user_id', Auth::id())->get();
-        $items = Cart::where('session_id', session()->getId())->get();
 
-        return view('home', ['orders' => $orders, 'products' => $items]);
+        return view('home', ['orders' => $orders]);
     }
 
     /**
@@ -54,14 +54,30 @@ class HomeController extends Controller
         }else{
 
             foreach(Cart::getContent() as $item){
-                
+
                 $sales = new Sales;
                 $sales->quantity = $item->quantity;
-                $sale->amount = $item->price;
+                $sales->amount = $item->price;
                 $sales->product_id = $item->id;
-                $sales->vendor_id = $item->vendor_id;
+                $sales->vendor_id = session('vendor_id');
+                $sales->address = $address;
                 $sales->save();
             }
+
+            foreach(Cart::getContent() as $item){
+
+                 $order = new Orders;
+                $order->prize = session('amount') * session('quantity');
+                $order->address = session('address');
+                $order->name = session('name');
+                $order->quantity = session('quantity');
+                $order->product_id = session('product_id');
+                $order->paid = true;
+                $order->user_id = Auth::id();
+                $order->save();
+            }
+
+            Cart::clear();
 
             return redirect('home')->with('success', 'Order placed successfully.');
         }
