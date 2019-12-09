@@ -6,14 +6,14 @@
         <div class="col-md-4">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h4 class="text-center">Register</h4><br>
+                    <h4 class="text-center">Admin Register</h4><br>
                     <form method="POST" action="{{ route('admin.register') }}">
                         @csrf
 
                       
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label>Last Name</label>
+                                <label>Name</label>
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name">
 
                                 @error('name')

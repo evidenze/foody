@@ -13,7 +13,7 @@
                       
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label>Last Name</label>
+                                <label>Name</label>
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name">
 
                                 @error('name')

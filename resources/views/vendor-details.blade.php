@@ -32,7 +32,7 @@
 
 
    @if($vendor->is_active == false)
-   <form method="POST" action="{{ route('confirmVendor') }}" >
+   <form method="POST" action="{{ route('confirmVendor', $vendor->id) }}" >
                 @csrf
                 @method('PUT')
 
