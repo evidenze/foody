@@ -123,15 +123,26 @@ class HomeController extends Controller
         if (($chargeResponsecode == "00" || $chargeResponsecode == "0")) {
 
 
-            $order = new Orders;
-            $order->prize = session('amount') * session('quantity');
-            $order->address = session('address');
-            $order->name = session('name');
-            $order->quantity = session('quantity');
-            $order->product_id = session('product_id');
-            $order->paid = true;
-            $order->user_id = Auth::id();
-            $order->save();
+            foreach(Cart::getContent() as $item){
+
+                $sales = new Sales;
+                $sales->quantity = $item->quantity;
+                $sales->amount = $item->price;
+                $sales->product_id = $item->id;
+                $sales->vendor_id = session('vendor_id');
+                $sales->address = $address;
+                $sales->save();
+
+                $order = new Orders;
+                $order->prize = $item->price;
+                $order->address = $address;
+                $order->name = $item->name;
+                $order->quantity = $item->quantity;
+                $order->product_id = $item->id;
+                $order->paid = true;
+                $order->user_id = Auth::id();
+                $order->save();
+            }
 
             return redirect('home')->with('success', 'Order placed successfully.');
 
