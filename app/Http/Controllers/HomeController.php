@@ -62,17 +62,14 @@ class HomeController extends Controller
                 $sales->vendor_id = session('vendor_id');
                 $sales->address = $address;
                 $sales->save();
-            }
 
-            foreach(Cart::getContent() as $item){
-
-                 $order = new Orders;
-                $order->prize = session('amount') * session('quantity');
-                $order->address = session('address');
-                $order->name = session('name');
-                $order->quantity = session('quantity');
-                $order->product_id = session('product_id');
-                $order->paid = true;
+                $order = new Orders;
+                $order->prize = $item->price;
+                $order->address = $address;
+                $order->name = $item->name;
+                $order->quantity = $item->quantity;
+                $order->product_id = $item->id;
+                $order->paid = false;
                 $order->user_id = Auth::id();
                 $order->save();
             }
